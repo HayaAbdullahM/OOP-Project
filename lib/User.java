@@ -1,10 +1,14 @@
-public class User {
+abstract public class User {
 
-    public static String loggedInUser = "" ; 
+    String username;
+    String password;
 
-    public static void setLoggedInUser(String username){
-        loggedInUser = username  ;
+
+    User(String username, String password){
+        this.username = username;
+        this.password = password;
     }
+
 
 
 }

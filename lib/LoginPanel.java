@@ -82,12 +82,31 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == loginButton) {
 
-                if (textField.getText().equals(passwordField.getText())) {
-                    User.setLoggedInUser(textField.getText().trim()) ;  
-                    Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
+                
+
+                boolean found = false;
+                for (int i = 0; i < Admin.adminsArr.size(); i++) {
+                    if (Admin.adminsArr.get(i).username.equals(textField.getText().trim())
+                    && Admin.adminsArr.get(i).password.equals(passwordField.getText().trim())) {
+                        Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
+                        found = true ; 
+                        break ; 
+                    }
+                }
+
+                for (int i = 0; i < Customer.customersArr.size(); i++) {
+                    if (Customer.customersArr.get(i).username.equals(textField.getText().trim())
+                    && Customer.customersArr.get(i).password.equals(passwordField.getText().trim())) {
+                        System.out.println("Logged In");
+                        found = true ; 
+                        break ; 
+                    }
+                }
+                
 
 
-                } else {
+                if (!found) {
+
                     JOptionPane.showMessageDialog(null, "Incorrect Username Or Password\nPlease Try Again",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }

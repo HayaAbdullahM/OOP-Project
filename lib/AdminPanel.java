@@ -13,8 +13,6 @@ public class AdminPanel extends JPanel {
     JButton deleteMovieButton = new JButton("Delete Movie");
     JButton exportDataButton = new JButton("Export Data");
 
-
-
     AdminPanel() {
         setLayout(new BorderLayout());
 
@@ -22,12 +20,10 @@ public class AdminPanel extends JPanel {
 
         whitePanel.setLayout(new GridLayout(0, 1));
         whitePanel.setBackground(Color.WHITE);
-        System.out.println(User.loggedInUser);
-        System.out.println( User.loggedInUser);
+
         mainLabel.setText("Admin Panel");
         mainLabel.setFont(new Font("Arial", Font.BOLD, 34));
         mainLabel.setBorder(new EmptyBorder(130, 100, 30, 100));
-
 
         addMovieButton.setPreferredSize(new Dimension(120, 40));
         deleteMovieButton.setPreferredSize(new Dimension(120, 40));
@@ -46,33 +42,29 @@ public class AdminPanel extends JPanel {
         exportDataButton.addActionListener(new ButtonHandler());
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(Color.WHITE) ; 
-        buttonPanel.setSize(100 , 100) ; 
-        buttonPanel.setLayout(new GridLayout(0 , 1 , 0 , 0)) ; 
+        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setSize(100, 100);
+        buttonPanel.setLayout(new GridLayout(0, 1, 0, 0));
 
+        JPanel buttonPanelOne = new JPanel();
+        JPanel buttonPanelTwo = new JPanel();
+        JPanel buttonPanelThree = new JPanel();
 
-        JPanel buttonPanelOne = new JPanel() ; 
-        JPanel buttonPanelTwo = new JPanel() ; 
-        JPanel buttonPanelThree = new JPanel() ; 
+        buttonPanelOne.setPreferredSize(new Dimension(100, 100));
+        buttonPanelTwo.setPreferredSize(new Dimension(100, 100));
+        buttonPanelThree.setPreferredSize(new Dimension(100, 100));
 
-        buttonPanelOne.setPreferredSize(new Dimension(100 , 100)) ; 
-        buttonPanelTwo.setPreferredSize(new Dimension(100 , 100)) ; 
-        buttonPanelThree.setPreferredSize(new Dimension(100 , 100)) ; 
+        buttonPanelOne.add(addMovieButton);
+        buttonPanelTwo.add(deleteMovieButton);
+        buttonPanelThree.add(exportDataButton);
 
+        buttonPanelOne.setBackground(Color.WHITE);
+        buttonPanelTwo.setBackground(Color.WHITE);
+        buttonPanelThree.setBackground(Color.WHITE);
 
-
-        buttonPanelOne.add(addMovieButton) ; 
-        buttonPanelTwo.add(deleteMovieButton) ; 
-        buttonPanelThree.add(exportDataButton) ; 
-
-        buttonPanelOne.setBackground(Color.WHITE) ; 
-        buttonPanelTwo.setBackground(Color.WHITE) ; 
-        buttonPanelThree.setBackground(Color.WHITE) ; 
-
-        buttonPanel.add(buttonPanelOne) ; 
-        buttonPanel.add(buttonPanelTwo) ; 
-        buttonPanel.add(buttonPanelThree) ; 
-
+        buttonPanel.add(buttonPanelOne);
+        buttonPanel.add(buttonPanelTwo);
+        buttonPanel.add(buttonPanelThree);
 
         whitePanel.add(mainLabel);
         whitePanel.add(buttonPanel);
@@ -98,11 +90,13 @@ public class AdminPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == addMovieButton) {
-                Main.cardLayout.show(MainFrame.framePanel , "loginPanel");
+                Main.cardLayout.show(MainFrame.framePanel, "addMoviePanel");
             }
 
             if (e.getSource() == deleteMovieButton) {
-                Main.cardLayout.show(MainFrame.framePanel , "signUpPanel");
+                String movieName = JOptionPane.showInputDialog(null, "Delete Movie", "Name Of The Movie",
+                        JOptionPane.INFORMATION_MESSAGE);
+                System.out.println(movieName);
             }
 
         }
