@@ -97,7 +97,24 @@ public class AdminPanel extends JPanel {
                 String movieName = JOptionPane.showInputDialog(null, "Delete Movie", "Name Of The Movie",
                         JOptionPane.INFORMATION_MESSAGE);
                 System.out.println(movieName);
+
+                String movieId = Movie.getMovieId(movieName);
+
+                for (int i = 0; i < Movie.moviesArr.size(); i++) {
+                    if (Movie.moviesArr.get(i).id.equals(movieId)) {
+                        Movie.moviesArr.remove(i);
+                        break;
+                    }
+                }
+
+                Main.database.deleteMovie(movieId);
+
             }
+
+            if(e.getSource() == exportDataButton){
+                FilesManager.downloadCSV() ; 
+            }
+
 
         }
 

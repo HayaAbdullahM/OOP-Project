@@ -12,14 +12,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        database.createConnection();
-        database.setUsers();
+        Runner.runApp();
 
         
-
-
-
-        new MainFrame() ; 
 
 
     }

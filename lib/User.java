@@ -1,7 +1,10 @@
-abstract public class User {
+public class User {
+
+    public static User loggedInUser ; 
 
     String username;
     String password;
+
 
 
     User(String username, String password){
