@@ -83,7 +83,6 @@ public class SignUpPanel extends JPanel {
 
         whitePanel.add(usernamesPanel);
         whitePanel.add(emailPanel);
-        whitePanel.add(phoneNumberPanel);
         whitePanel.add(agePanel);
         whitePanel.add(passwordPanel);
         whitePanel.add(signUpButtonButtonPanel);
@@ -101,6 +100,15 @@ public class SignUpPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == signUpButton) {
+
+                
+
+                String username = usernameTextFiled.getText().trim() ; 
+                String password = passwordField.getText().trim() ;
+                String email = emailTextField.getText().trim() ; 
+                String age = ageTextField.getText().trim() ;
+
+                Main.database.addCostumer(username, password, email, age);
 
                 System.out.println("Created User");
 

@@ -26,6 +26,24 @@ public class Connector {
     }
 
 
+    public void addCostumer(String username , String password , String email , String age){
+        PreparedStatement createStatement  ; 
+        try {
+            createStatement = connection.prepareStatement(
+            "INSERT INTO Costumers VALUES (? , ? , ? , ?) ; " 
+        ) ;  
+            createStatement.setString(1 , username) ; 
+            createStatement.setString(2 , password) ; 
+            createStatement.setString(3 , email) ; 
+            createStatement.setString(4 , age) ; 
+
+            createStatement.executeUpdate() ; 
+
+        } catch (Exception e) {
+            System.out.println("Nope");
+        }
+    }
+
     public void setUsers(){
 
         try {
