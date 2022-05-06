@@ -8,6 +8,10 @@ public class MenuPanel extends JPanel {
 
     static ArrayList<String> totalSides = new ArrayList<String>();
 
+    JPanel blackPanel = new JPanel();
+    JPanel whitePanel = new JPanel() ; 
+
+
     JPanel centerPanel = new JPanel();
     JPanel bottomPanel = new JPanel();
 
@@ -34,6 +38,19 @@ public class MenuPanel extends JPanel {
     };
 
     MenuPanel() {
+
+
+        // ! Black Panel
+        blackPanel.setBackground(Color.BLACK);
+        blackPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        JLabel blackLabel = new JLabel();
+        blackLabel.setText("STAR CITY");
+        blackLabel.setFont(new Font("Arial", Font.BOLD, 32));
+        blackLabel.setForeground(Color.WHITE);
+        blackLabel.setIcon(new ImageIcon("./resource/img/mainLogo.png"));
+        blackPanel.add(blackLabel);
+
+
 
         // ! Coloring
         setBackground(Color.white);
@@ -66,6 +83,8 @@ public class MenuPanel extends JPanel {
 
         centerPanel.add(sidesPanel);
         centerPanel.add(drinksPanel);
+
+        add(blackPanel , BorderLayout.NORTH);
 
         add(centerPanel, BorderLayout.CENTER);
 

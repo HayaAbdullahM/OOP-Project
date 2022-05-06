@@ -1,7 +1,11 @@
 public class Payment {
 
-    public static int totalPrice(int numOfAdults, int numOfKids, int moviePrice) {
+    public static int totalPrice() {
         int totalPrice = 0;
+
+        int numOfAdults = Integer.parseInt(BookMoviePanel.adultTextField.getText());
+        int numOfKids = Integer.parseInt(BookMoviePanel.kidsTextField.getText());
+        int moviePrice = 50;
 
         totalPrice += numOfAdults * moviePrice;
         totalPrice += numOfKids * moviePrice * 0.75;

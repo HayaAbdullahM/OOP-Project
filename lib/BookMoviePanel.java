@@ -8,8 +8,8 @@ public class BookMoviePanel extends JPanel {
     JPanel blackPanel = new JPanel();
     JPanel whitePanel = new JPanel();
 
-    JTextField adultTextField = new JTextField(2);
-    JTextField kidsTextField = new JTextField(2);
+    static JTextField adultTextField = new JTextField(2);
+    static JTextField kidsTextField = new JTextField(2);
 
     JButton bookButton = new JButton("Book");
     JButton backButton = new JButton("Back");
@@ -101,8 +101,12 @@ public class BookMoviePanel extends JPanel {
             if (backButton == e.getSource()) {
                 Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
             }
-            if(bookButton == e.getSource()) {
-                System.out.println("The Total For "+ Movie.getMoviesTitles()[selectedIndex] +" Will Be = " + Payment.totalPrice(Integer.parseInt(adultTextField.getText()) , Integer.parseInt(kidsTextField.getText()) , 50));
+            if (bookButton == e.getSource()) {
+
+                Main.cardLayout.show(MainFrame.framePanel, "paymentPanel");
+
+                System.out.println(Payment.totalPrice()); 
+                
             }
         }
 

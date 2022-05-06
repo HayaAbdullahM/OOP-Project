@@ -20,6 +20,7 @@ public class MainFrame extends JFrame {
         framePanel.add(new CustomerPanel(), "customerPanel");
         framePanel.add(new BookMoviePanel(), "bookMoviePanel");
         framePanel.add(new MenuPanel(), "menuPanel");
+        framePanel.add(new PaymentPanel(), "paymentPanel");
 
         add(framePanel);
 

@@ -101,16 +101,17 @@ public class SignUpPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == signUpButton) {
 
-                
+                String username = usernameTextFiled.getText().trim();
+                String password = passwordField.getText().trim();
+                String email = emailTextField.getText().trim();
+                String age = ageTextField.getText().trim();
 
-                String username = usernameTextFiled.getText().trim() ; 
-                String password = passwordField.getText().trim() ;
-                String email = emailTextField.getText().trim() ; 
-                String age = ageTextField.getText().trim() ;
+                if ((!username.isEmpty()) && (!password.isEmpty()) & (!email.isEmpty()) && !(password.isEmpty())) {
+                    System.out.println("Created");
+                    Main.database.addCostumer(username, password, email, age);
 
-                Main.database.addCostumer(username, password, email, age);
-
-                System.out.println("Created User");
+                    Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                }
 
             }
 
