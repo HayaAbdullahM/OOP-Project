@@ -1,6 +1,5 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.*;
 import java.awt.event.*;
 
@@ -63,7 +62,6 @@ public class MainPanel extends JPanel {
         add(blackPanel, BorderLayout.WEST);
         add(whitePanel, BorderLayout.CENTER);
 
-        setVisible(true);
     }
 
     private class ButtonHandler implements ActionListener {
@@ -71,11 +69,11 @@ public class MainPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == loginButton) {
-                Main.cardLayout.show(MainFrame.framePanel , "loginPanel");
+                Main.cardLayout.show(MainFrame.framePanel, "loginPanel");
             }
 
             if (e.getSource() == signUpButton) {
-                Main.cardLayout.show(MainFrame.framePanel , "signUpPanel");
+                Main.cardLayout.show(MainFrame.framePanel, "signUpPanel");
             }
 
         }

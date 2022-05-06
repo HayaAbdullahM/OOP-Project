@@ -98,7 +98,9 @@ public class LoginPanel extends JPanel {
                 for (int i = 0; i < Customer.customersArr.size(); i++) {
                     if (Customer.customersArr.get(i).username.equals(textField.getText().trim())
                     && Customer.customersArr.get(i).password.equals(passwordField.getText().trim())) {
-                        User.loggedInUser = new User(Customer.customersArr.get(i).username , Customer.customersArr.get(i).password);
+                        User.loggedInUser.setUser(new User(Customer.customersArr.get(i).username , Customer.customersArr.get(i).password));
+                        System.out.println(User.loggedInUser.username);
+                        Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
                         found = true ; 
                         break ; 
                     }

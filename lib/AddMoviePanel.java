@@ -140,9 +140,10 @@ public class AddMoviePanel extends JPanel {
                 String language = languageTextField.getText().trim();
 
                 String duration = durationTextField.getText().trim();
+                
                 String ageRestriction = ageResTextField.getText().trim();
                 String IMDb = IMDbTextField.getText().trim();
-                String showDate = showTimeOneTextField.getText().trim();
+                String showDate = showTimeTwoTextField.getText().trim();
                 String showTime = showTimeOneTextField.getText().trim();
 
                 Movie movie = new Movie(

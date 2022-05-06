@@ -17,6 +17,9 @@ public class MainFrame extends JFrame {
         framePanel.add(new SignUpPanel(), "signUpPanel");
         framePanel.add(new AdminPanel(), "adminPanel");
         framePanel.add(new AddMoviePanel(), "addMoviePanel");
+        framePanel.add(new CustomerPanel(), "customerPanel");
+        framePanel.add(new BookMoviePanel(), "bookMoviePanel");
+        framePanel.add(new MenuPanel(), "menuPanel");
 
         add(framePanel);
 

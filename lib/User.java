@@ -1,6 +1,6 @@
 public class User {
 
-    public static User loggedInUser ; 
+    public static User loggedInUser = new User("User" , "1234"); ; 
 
     String username;
     String password;
@@ -12,6 +12,9 @@ public class User {
         this.password = password;
     }
 
+    public void setUser(User user){
+        loggedInUser = user ; 
+    }
 
 
 }

@@ -94,7 +94,7 @@ public class Connector {
             }
 
         } catch (Exception e) {
-            System.out.println("Could Not Create");
+            System.out.println("Could Not Get Users");
         }
 
     }
@@ -110,7 +110,7 @@ public class Connector {
                 String genre = rs.getString("genre");
 
                 String language = rs.getString("language");
-                String duration = rs.getInt("language") + "";
+                String duration = rs.getInt("duration") + "";
                 String ageRestriction = rs.getString("ageRestriction");
                 String IMDb = rs.getString("IMDb");
                 String showDate = rs.getString("showDate");
