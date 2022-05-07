@@ -1,3 +1,5 @@
+
+
 public class Payment {
 
     public static int totalPrice() {

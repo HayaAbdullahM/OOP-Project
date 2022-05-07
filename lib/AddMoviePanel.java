@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -126,7 +127,7 @@ public class AddMoviePanel extends JPanel {
                 type = "Now-Showing";
             } else if (e.getSource() == upComing) {
                 type = "Up-Coming";
-                
+
             }
 
             if (e.getSource() == backButton) {
@@ -140,7 +141,7 @@ public class AddMoviePanel extends JPanel {
                 String language = languageTextField.getText().trim();
 
                 String duration = durationTextField.getText().trim();
-                
+
                 String ageRestriction = ageResTextField.getText().trim();
                 String IMDb = IMDbTextField.getText().trim();
                 String showDate = showTimeTwoTextField.getText().trim();
@@ -149,11 +150,21 @@ public class AddMoviePanel extends JPanel {
                 Movie movie = new Movie(
                         id, title, genre, language, duration, ageRestriction, IMDb, showDate, showTime, type);
 
-                Movie.moviesArr.add(movie) ; 
+                Movie.moviesArr.add(movie);
 
                 Main.database.addMovie(movie);
 
                 Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
+
+                showTimeTwoTextField.setText("");
+                showTimeOneTextField.setText("");
+                IMDbTextField.setText("");
+                ageResTextField.setText("");
+                durationTextField.setText("");
+                durationTextField.setText("");
+                languageTextField.setText("");
+                genreTextField.setText("");
+                movieTitle.setText("");
 
             }
         }
