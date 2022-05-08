@@ -36,7 +36,7 @@ public class PaymentPanel extends JPanel {
         payButton.setForeground(Color.WHITE);
         payButton.setFocusable(false);
         payButton.addActionListener(new ButtonHandler());
-        payButton.setText("Pay " + Payment.totalPrice() + " SAR");
+        payButton.setText("Pay");
 
         // ! Adding
 
@@ -66,8 +66,8 @@ public class PaymentPanel extends JPanel {
             if (e.getSource() == payButton) {
 
                 try {
-                    Integer.parseInt(cardNumberTextField.getText().trim());
-                    Integer.parseInt(cardMonthTextField.getText().trim());
+                    Integer.parseInt(cardNumberTextField.getText().trim()) ; 
+                    Integer.parseInt(cardMonthTextField.getText().trim()) ; 
                     Integer.parseInt(cardDayTextField.getText().trim());
                     Integer.parseInt(cardCVCTextField.getText().trim());
 
