@@ -21,8 +21,8 @@ public class MenuPanel extends JPanel {
     JButton backButton = new JButton("Back");
 
     JCheckBox[] sidesArr = {
-            new JCheckBox("Popcorn", false), new JCheckBox("Fries", false), new JCheckBox("Nachos", false),
-            new JCheckBox("Chips", false)
+            new JCheckBox("Popcorn (15SR)", false), new JCheckBox("Fries (15SR) ", false), new JCheckBox("Nachos (15SR)  ", false),
+            new JCheckBox("Chips (15SR) ", false)
     };
 
     // ! Drinks Menu
@@ -33,8 +33,8 @@ public class MenuPanel extends JPanel {
     JCheckBox waterBox = new JCheckBox("Water", false);
 
     JCheckBox[] drinksArr = {
-            new JCheckBox("Soft Drinks", false), new JCheckBox("Fresh Juice", false), new JCheckBox("Slashes", false),
-            new JCheckBox("Water", false)
+            new JCheckBox("Soft Drinks (10SR)", false), new JCheckBox("Fresh Juice (10SR) ", false), new JCheckBox("Slashes (10SR)", false),
+            new JCheckBox("Water (3SR)", false)
     };
 
     MenuPanel() {
