@@ -66,7 +66,6 @@ public class LoginPanel extends JPanel {
         whitePanel.add(usernamesPanel);
         whitePanel.add(passwordPanel);
         whitePanel.add(loginButtonPanel);
-        ;
         whitePanel.add(returnButtonPanel);
 
         // ! Adding Elements
@@ -82,33 +81,31 @@ public class LoginPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == loginButton) {
 
-                
-
-                boolean found = false;
+                boolean isFound = false;
                 for (int i = 0; i < Admin.adminsArr.size(); i++) {
                     if (Admin.adminsArr.get(i).username.equals(textField.getText().trim())
-                    && Admin.adminsArr.get(i).password.equals(passwordField.getText().trim())) {
-                        User.loggedInUser = new User(Customer.customersArr.get(i).username , Customer.customersArr.get(i).password);
+                            && Admin.adminsArr.get(i).password.equals(passwordField.getText().trim())) {
+                        User.loggedInUser = new User(Customer.customersArr.get(i).username,
+                                Customer.customersArr.get(i).password);
                         Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
-                        found = true ; 
-                        break ; 
+                        isFound = true;
+                        break;
                     }
                 }
 
                 for (int i = 0; i < Customer.customersArr.size(); i++) {
                     if (Customer.customersArr.get(i).username.equals(textField.getText().trim())
-                    && Customer.customersArr.get(i).password.equals(passwordField.getText().trim())) {
-                        User.loggedInUser.setUser(new User(Customer.customersArr.get(i).username , Customer.customersArr.get(i).password));
+                            && Customer.customersArr.get(i).password.equals(passwordField.getText().trim())) {
+                        User.loggedInUser.setUser(
+                                new User(Customer.customersArr.get(i).username, Customer.customersArr.get(i).password));
                         System.out.println(User.loggedInUser.username);
                         Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
-                        found = true ; 
-                        break ; 
+                        isFound = true;
+                        break;
                     }
                 }
-                
 
-
-                if (!found) {
+                if (!isFound) {
 
                     JOptionPane.showMessageDialog(null, "Incorrect Username Or Password\nPlease Try Again",
                             "Error", JOptionPane.ERROR_MESSAGE);

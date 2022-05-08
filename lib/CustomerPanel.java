@@ -31,7 +31,7 @@ public class CustomerPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
         buttonPanel.setSize(100, 100);
-        buttonPanel.setLayout(new GridLayout(0, 1, 0, 0));
+        buttonPanel.setLayout(new GridLayout(0, 1));
 
         JPanel buttonPanelOne = new JPanel();
         JPanel buttonPanelTwo = new JPanel();

@@ -108,7 +108,6 @@ public class Connector {
                 String id = rs.getString("id");
                 String title = rs.getString("title");
                 String genre = rs.getString("genre");
-
                 String language = rs.getString("language");
                 String duration = rs.getInt("duration") + "";
                 String ageRestriction = rs.getString("ageRestriction");

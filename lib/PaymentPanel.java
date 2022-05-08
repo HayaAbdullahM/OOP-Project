@@ -35,7 +35,7 @@ public class PaymentPanel extends JPanel {
         payButton.setBackground(Color.black);
         payButton.setForeground(Color.WHITE);
         payButton.setFocusable(false);
-        payButton.addActionListener(new ButtonHandler()) ; 
+        payButton.addActionListener(new ButtonHandler());
         payButton.setText("Pay " + Payment.totalPrice() + " SAR");
 
         // ! Adding
@@ -63,10 +63,30 @@ public class PaymentPanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == payButton){
-                JOptionPane.showMessageDialog(null , "Print Your Ticket" , "Payed Successfully" , JOptionPane.YES_NO_CANCEL_OPTION) ; 
-                
-                Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+            if (e.getSource() == payButton) {
+
+                try {
+                    Integer.parseInt(cardNumberTextField.getText().trim());
+                    Integer.parseInt(cardMonthTextField.getText().trim());
+                    Integer.parseInt(cardDayTextField.getText().trim());
+                    Integer.parseInt(cardCVCTextField.getText().trim());
+
+                    int answer = JOptionPane.showConfirmDialog(null, "Total Price : " + Payment.totalPrice() + "",
+                            "Confirm Payment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+                    if (answer == 0) {
+                        JOptionPane.showMessageDialog(null, "Print Your Ticket", "Payed Successfully",
+                                JOptionPane.YES_NO_CANCEL_OPTION);
+                        Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                    } else {
+                        Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                    }
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "One Of The Fields Are Entered Unsuccessfully\nPlease Try Again", "Error Occurred",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         }
     }
