@@ -1,6 +1,6 @@
 public class User {
 
-    public static User loggedInUser = new User("User" , "1234"); ; 
+    public static User loggedInUser = new User("User" , "1234"); 
 
     String username;
     String password;

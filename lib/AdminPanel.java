@@ -11,7 +11,8 @@ public class AdminPanel extends JPanel {
     JPanel whitePanel = new JPanel();
     JButton addMovieButton = new JButton("Add New Movie");
     JButton deleteMovieButton = new JButton("Delete Movie");
-    JButton exportDataButton = new JButton("Export Data");
+    JButton exportDataButton = new JButton("Export Movies");
+    JButton exportTicketButton = new JButton("Export Ticket");
 
     AdminPanel() {
         setLayout(new BorderLayout());
@@ -28,18 +29,22 @@ public class AdminPanel extends JPanel {
         addMovieButton.setPreferredSize(new Dimension(120, 40));
         deleteMovieButton.setPreferredSize(new Dimension(120, 40));
         exportDataButton.setPreferredSize(new Dimension(120, 40));
+        exportTicketButton.setPreferredSize(new Dimension(120, 40));
 
         addMovieButton.setBackground(Color.WHITE);
         deleteMovieButton.setBackground(Color.WHITE);
         exportDataButton.setBackground(Color.WHITE);
+        exportTicketButton.setBackground(Color.WHITE);
 
         addMovieButton.setFocusable(false);
         deleteMovieButton.setFocusable(false);
         exportDataButton.setFocusable(false);
+        exportTicketButton.setFocusable(false);
 
         addMovieButton.addActionListener(new ButtonHandler());
         deleteMovieButton.addActionListener(new ButtonHandler());
         exportDataButton.addActionListener(new ButtonHandler());
+        exportTicketButton.addActionListener(new ButtonHandler());
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
@@ -56,7 +61,11 @@ public class AdminPanel extends JPanel {
 
         buttonPanelOne.add(addMovieButton);
         buttonPanelTwo.add(deleteMovieButton);
+
+        buttonPanelThree.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+
         buttonPanelThree.add(exportDataButton);
+        buttonPanelThree.add(exportTicketButton);
 
         buttonPanelOne.setBackground(Color.WHITE);
         buttonPanelTwo.setBackground(Color.WHITE);
@@ -100,25 +109,50 @@ public class AdminPanel extends JPanel {
 
                 String movieId = Movie.getMovieId(movieName);
 
-                if(movieId.equals("-1")) {
+                if (movieId.equals("-1")) {
                     Handler.showError("No Movie With This Title");
-                }
+                } else {
 
-                for (int i = 0; i < Movie.moviesArr.size(); i++) {
-                    if (Movie.moviesArr.get(i).id.equals(movieId)) {
-                        Movie.moviesArr.remove(i);
-                        break;
+                    for (int i = 0; i < Movie.moviesArr.size(); i++) {
+                        if (Movie.moviesArr.get(i).id.equals(movieId)) {
+                            if (Movie.moviesArr.get(i).type.equals("Up-Coming")) {
+                                Main.database.deleteUpComing(movieId);
+                            } else {
+                                Main.database.deleteNowShowing(movieId);
+                            }
+                            break;
+                        }
                     }
+
+                    JOptionPane.showMessageDialog(null, "Movie Deleted Successfully", "Done",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    ;
+                }
+            }
+
+            if (e.getSource() == exportDataButton) {
+                FilesManager.downloadCSVMovies();
+            }
+
+            if (e.getSource() == exportTicketButton) {
+
+                String movieName = JOptionPane.showInputDialog(null, "Export Tickets", "Name Of The Movie",
+                        JOptionPane.INFORMATION_MESSAGE);
+                System.out.println(movieName);
+
+                String movieId = Movie.getMovieId(movieName);
+
+                if (movieId.equals("-1")) {
+                    Handler.showError("No Movie With This Title");
+                } else {
+
                 }
 
-                Main.database.deleteMovie(movieId);
+                Main.database.getTickets(movieId);
+                FilesManager.downloadCSVTickets();
+                Ticket.ticketsArr.clear();
 
             }
-
-            if(e.getSource() == exportDataButton){
-                FilesManager.downloadCSV() ; 
-            }
-
 
         }
 

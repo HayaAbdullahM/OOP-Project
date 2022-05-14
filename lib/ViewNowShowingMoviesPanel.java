@@ -3,10 +3,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ViewMoviesPanel extends JFrame {
+public class ViewNowShowingMoviesPanel extends JFrame {
     
-    ViewMoviesPanel(){
-        JScrollPane sp = new JScrollPane(new AllMoviesPanel() , JScrollPane.VERTICAL_SCROLLBAR_ALWAYS , JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+    ViewNowShowingMoviesPanel(){
+        JScrollPane sp = new JScrollPane(new NowShowingMoviesPanel() , JScrollPane.VERTICAL_SCROLLBAR_ALWAYS , JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
         
 
         add(sp) ; 
@@ -17,6 +17,6 @@ public class ViewMoviesPanel extends JFrame {
         setSize(700 , 500) ; 
         
     }
-
+ 
 
 }

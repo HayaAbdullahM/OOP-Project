@@ -4,6 +4,7 @@ import java.util.Random;
 public class Movie {
 
     public static ArrayList<Movie> moviesArr = new ArrayList<Movie>();
+    public static Movie selectedMovie = null;
 
     String id;
     String title;

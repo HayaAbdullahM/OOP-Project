@@ -66,8 +66,16 @@ public class PaymentPanel extends JPanel {
             if (e.getSource() == payButton) {
 
                 try {
-                    Integer.parseInt(cardNumberTextField.getText().trim()) ; 
-                    Integer.parseInt(cardMonthTextField.getText().trim()) ; 
+
+                    Ticket t = new Ticket(
+                            User.loggedInUser.username, 1, 0, Payment.totalPrice(),
+                            cardHolderTextField.getText().trim(),
+                            cardNumberTextField.getText().trim(),
+                            cardMonthTextField.getText().trim() + " " + cardDayTextField.getText().trim(),
+                            Integer.parseInt(cardCVCTextField.getText().trim()));
+
+                    Integer.parseInt(cardNumberTextField.getText().trim());
+                    Integer.parseInt(cardMonthTextField.getText().trim());
                     Integer.parseInt(cardDayTextField.getText().trim());
                     Integer.parseInt(cardCVCTextField.getText().trim());
 
@@ -77,13 +85,17 @@ public class PaymentPanel extends JPanel {
                     if (answer == 0) {
                         JOptionPane.showMessageDialog(null, "Print Your Ticket", "Payed Successfully",
                                 JOptionPane.YES_NO_CANCEL_OPTION);
+
+                        Main.database.addTicket(Movie.selectedMovie, t);
+
                         Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
                     } else {
                         Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
                     }
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "One Of The Fields Are Entered Unsuccessfully\nPlease Try Again", "Error Occurred",
+                    JOptionPane.showMessageDialog(null,
+                            "One Of The Fields Are Entered Unsuccessfully\nPlease Try Again", "Error Occurred",
                             JOptionPane.ERROR_MESSAGE);
                 }
 

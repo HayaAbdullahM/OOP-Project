@@ -14,22 +14,39 @@ public class FilesManager {
         return chooser.getSelectedFile().toPath();
     }
 
-    public static void downloadCSV() {
+    public static void downloadCSVTickets() {
         openFile();
-        addRecords();
+        addTicketsRecords();
+        closeFile();
+    }
+
+    public static void addTicketsRecords() {
+        output.format(
+                "Username , Adults , Kids , Total Price , Card Holder , Card Number , Expiry Date , Pin Code \n",
+                "");
+        for (int i = 0; i < Ticket.ticketsArr.size(); i++) {
+            Ticket t = Ticket.ticketsArr.get(i);
+            output.format("%s , %s , %s , %s , %s , %s , %s , %s \n", t.username , t.adults , t.kids , t.totalPrice , t.cardHolder , t.cardNumber , t.expiryDate , t.pinCode);
+        }
+
+    }
+
+    public static void downloadCSVMovies() {
+        openFile();
+        addMoviesRecords();
         closeFile();
     }
 
     public static void openFile() {
         try {
-            output = new Formatter(getDownloadPath() + "/Movies.csv");
+            output = new Formatter(getDownloadPath() + "/Data.csv");
 
         } catch (FileNotFoundException e) {
 
         }
     }
 
-    public static void addRecords() {
+    public static void addMoviesRecords() {
         output.format(
                 "Id , Title , Genre , Language , Duration , Age Restriction , IMDb Rating , Show Date , Show Time , Type \n",
                 "");

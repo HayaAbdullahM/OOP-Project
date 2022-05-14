@@ -10,7 +10,8 @@ public class CustomerPanel extends JPanel {
     JPanel blackPanel = new JPanel();
     JPanel whitePanel = new JPanel();
 
-    JButton viewMoviesButton = new JButton("View Movies");
+    JButton viewUpComingMoviesButton = new JButton("View Up Coming Movies");
+    JButton viewNowShowingMoviesButton = new JButton("View Now Showing Movies");
     JButton bookMovieButton = new JButton("Book Movie");
     JButton orderFoodButton = new JButton("Order Food");
 
@@ -24,7 +25,7 @@ public class CustomerPanel extends JPanel {
         whitePanel.setLayout(new GridLayout(0, 1));
         whitePanel.setBackground(Color.WHITE);
 
-        mainLabel.setText("Welcome");
+        mainLabel.setText("Welcome ");
         mainLabel.setFont(new Font("Arial", Font.BOLD, 34));
         mainLabel.setBorder(new EmptyBorder(130, 100, 30, 100));
 
@@ -45,22 +46,28 @@ public class CustomerPanel extends JPanel {
         buttonPanelTwo.setBackground(Color.WHITE);
         buttonPanelThree.setBackground(Color.WHITE);
 
-        viewMoviesButton.setBackground(Color.WHITE);
+        viewNowShowingMoviesButton.setBackground(Color.WHITE);
+        viewUpComingMoviesButton.setBackground(Color.WHITE);
         bookMovieButton.setBackground(Color.WHITE);
         orderFoodButton.setBackground(Color.WHITE);
 
-        buttonPanelOne.add(viewMoviesButton);
+        buttonPanelOne.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+
+        buttonPanelOne.add(viewNowShowingMoviesButton);
+
+        buttonPanelOne.add(viewUpComingMoviesButton);
         buttonPanelTwo.add(bookMovieButton);
         buttonPanelThree.add(orderFoodButton);
 
-        viewMoviesButton.setFocusable(false);
+        viewNowShowingMoviesButton.setFocusable(false);
+        viewUpComingMoviesButton.setFocusable(false);
         bookMovieButton.setFocusable(false);
         orderFoodButton.setFocusable(false);
 
-        viewMoviesButton.addActionListener(new ButtonHandler());
+        viewNowShowingMoviesButton.addActionListener(new ButtonHandler());
+        viewUpComingMoviesButton.addActionListener(new ButtonHandler());
         bookMovieButton.addActionListener(new ButtonHandler());
         orderFoodButton.addActionListener(new ButtonHandler());
-
 
         buttonPanel.add(buttonPanelOne);
         buttonPanel.add(buttonPanelTwo);
@@ -93,13 +100,20 @@ public class CustomerPanel extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if(viewMoviesButton == e.getSource()){
-                new ViewMoviesPanel() ; 
+            if (viewUpComingMoviesButton == e.getSource()) {
+                new ViewUpComingMoviesPanel();
             }
-            if(bookMovieButton == e.getSource()){
+
+            if (viewNowShowingMoviesButton == e.getSource()) {
+                new ViewNowShowingMoviesPanel();
+            }
+            if (bookMovieButton == e.getSource()) {
                 Main.cardLayout.show(MainFrame.framePanel, "bookMoviePanel");
+
+                System.out.println("Booking") ; 
+
             }
-            if(orderFoodButton == e.getSource()){
+            if (orderFoodButton == e.getSource()) {
                 Main.cardLayout.show(MainFrame.framePanel, "menuPanel");
 
             }

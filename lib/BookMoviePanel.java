@@ -105,7 +105,12 @@ public class BookMoviePanel extends JPanel {
 
                 Main.cardLayout.show(MainFrame.framePanel, "paymentPanel");
 
+                Movie.selectedMovie = Movie.moviesArr.get(selectedIndex) ; 
+
+                System.out.println( Movie.selectedMovie.title );
+                
                 System.out.println(Payment.totalPrice()); 
+                
                 
             }
         }

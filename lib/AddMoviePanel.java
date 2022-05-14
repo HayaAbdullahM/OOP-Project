@@ -15,9 +15,28 @@ public class AddMoviePanel extends JPanel {
     JTextField showTimeOneTextField = new JTextField();
     JTextField showTimeTwoTextField = new JTextField();
 
+    String[] genere = {
+            "Action", "Comedy", "Drama", "Family", "Horor"
+    };
+
+    String[] language = {
+            "English", "Arabic", "Indian"
+    };
+
+    JComboBox genreComboBox = new JComboBox(genere);
+    JComboBox languageComboBox = new JComboBox(language);
+
     JRadioButton nowShowing = new JRadioButton("NOW-SHOWING", true);
     JRadioButton upComing = new JRadioButton("UP-COMING", false);
-    ButtonGroup radioButton = new ButtonGroup();
+    ButtonGroup movieRadioButton = new ButtonGroup();
+
+    JRadioButton ageThree = new JRadioButton("3", true);
+    JRadioButton ageSeven = new JRadioButton("7", false);
+    JRadioButton ageTwelve = new JRadioButton("12", false);
+    JRadioButton ageSixteen = new JRadioButton("16", false);
+    JRadioButton ageEighteen = new JRadioButton("18", false);
+
+    ButtonGroup ageRestrictionRadioButton = new ButtonGroup();
 
     JButton addButton = new JButton("Add");
     JButton backButton = new JButton("Back");
@@ -29,6 +48,33 @@ public class AddMoviePanel extends JPanel {
     AddMoviePanel() {
         setBackground(Color.white);
         setLayout(null);
+
+        ageRestrictionRadioButton.add(ageThree);
+        ageRestrictionRadioButton.add(ageSeven);
+        ageRestrictionRadioButton.add(ageTwelve);
+        ageRestrictionRadioButton.add(ageSixteen);
+        ageRestrictionRadioButton.add(ageEighteen);
+
+        Panel agePanel = new Panel();
+        agePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
+        agePanel.add(ageThree);
+        agePanel.add(ageSeven);
+        agePanel.add(ageTwelve);
+        agePanel.add(ageSixteen);
+        agePanel.add(ageEighteen);
+        agePanel.setBackground(Color.white);
+
+        ageThree.setBackground(Color.white);
+        ageSeven.setBackground(Color.white);
+        ageTwelve.setBackground(Color.white);
+        ageSixteen.setBackground(Color.white);
+        ageEighteen.setBackground(Color.white);
+
+        ageThree.setFocusable(false);
+        ageSeven.setFocusable(false);
+        ageTwelve.setFocusable(false);
+        ageSixteen.setFocusable(false);
+        ageEighteen.setFocusable(false);
 
         backButton.setBounds(34, 21, 70, 31);
         backButton.setBackground(Color.white);
@@ -72,18 +118,18 @@ public class AddMoviePanel extends JPanel {
         upComingLabel.setBounds(480, 419, 112, 16);
 
         movieTitle.setBounds(225, 64, 356, 40);
-        genreTextField.setBounds(225, 112, 356, 40);
-        languageTextField.setBounds(225, 160, 356, 40);
+        genreComboBox.setBounds(225, 112, 356, 40);
+        languageComboBox.setBounds(225, 160, 356, 40);
         durationTextField.setBounds(225, 208, 356, 40);
-        ageResTextField.setBounds(225, 256, 356, 40);
+        agePanel.setBounds(225, 256, 356, 40);
         IMDbTextField.setBounds(225, 304, 356, 40);
         showTimeOneTextField.setBounds(225, 352, 159, 40);
         showTimeTwoTextField.setBounds(387, 352, 159, 40);
         addImageURL.setBounds(572, 352, 100, 40);
 
-        radioButton.add(nowShowing);
+        movieRadioButton.add(nowShowing);
 
-        radioButton.add(upComing);
+        movieRadioButton.add(upComing);
 
         nowShowing.setBounds(258, 419, 17, 17);
         upComing.setBounds(447, 419, 17, 17);
@@ -96,10 +142,10 @@ public class AddMoviePanel extends JPanel {
         add(IMDbLabel);
         add(showTimeLabel);
         add(movieTitle);
-        add(genreTextField);
-        add(languageTextField);
+        add(genreComboBox);
+        add(languageComboBox);
         add(durationTextField);
-        add(ageResTextField);
+        add(agePanel);
         add(IMDbTextField);
         add(showTimeOneTextField);
         add(showTimeTwoTextField);
@@ -170,6 +216,7 @@ public class AddMoviePanel extends JPanel {
                 Movie.moviesArr.add(movie);
 
                 Main.database.addMovie(movie);
+                Main.database.createTicketTable(id);
 
                 Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
 

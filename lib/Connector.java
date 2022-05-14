@@ -1,4 +1,7 @@
 import java.util.*;
+
+import javax.swing.table.*;
+
 import java.sql.*;
 import java.io.*;
 
@@ -56,10 +59,9 @@ public class Connector {
 
             }
 
-
-        if(movie.imgLink.equals("")){
-            System.out.println("No Image");
-        }    
+            if (movie.imgLink.equals("")) {
+                System.out.println("No Image");
+            }
 
             createStatement.setString(1, movie.id);
             createStatement.setString(2, movie.title);
@@ -167,6 +169,83 @@ public class Connector {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
         }
+    }
+
+    public void deleteUpComing(String movieId) {
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM upComing WHERE id = ? ");
+            preparedStatement.setString(1, movieId);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void deleteNowShowing(String movieId) {
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM nowShowing WHERE id = ? ");
+            preparedStatement.setString(1, movieId);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void createTicketTable(String movieId) {
+        try {
+            preparedStatement = connection.prepareStatement("CREATE TABLE " + movieId
+                    + "_Tickets ( username VARCHAR(48) , adults INT , kids INT , totalPrice INT , cardHolder VARCHAR(48) , cardNumber VARCHAR(16) , expiryDate VARCHAR(20) , pinCode VARCHAR(3)) ; ");
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void getTickets(String id) {
+
+        try {
+
+            System.out.println("SELECT * FROM `" + id + "_Tickets`");
+            ResultSet rs = statement.executeQuery("SELECT * FROM " + id + "_Tickets ; ");
+            while (rs.next()) {
+                String username = rs.getString("username");
+                int adults = rs.getInt("adults");
+                int kids = rs.getInt("kids");
+                int totalPrice = rs.getInt("totalPrice");
+                String cardHolder = rs.getString("cardHolder");
+                String cardNumber = rs.getString("cardNumber");
+                String expiryDate = rs.getString("expiryDate");
+                int pinCode = rs.getInt("pinCode");
+
+                Ticket.ticketsArr.add(
+                        new Ticket(username, adults, kids, totalPrice, cardHolder, cardNumber, expiryDate, pinCode));
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+
+    }
+
+    public void addTicket(Movie m, Ticket t) {
+        try {
+
+            preparedStatement = connection.prepareStatement("INSERT INTO `" + m.id.trim()
+                    + "_Tickets` (`username`, `adults`, `kids`, `totalPrice`, `cardHolder`, `cardNumber`, `expiryDate`, `pinCode`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+
+            preparedStatement.setString(1, t.username);
+            preparedStatement.setInt(2, t.adults);
+            preparedStatement.setInt(3, t.kids);
+            preparedStatement.setInt(4, t.totalPrice);
+            preparedStatement.setString(5, t.cardHolder);
+            preparedStatement.setString(6, t.cardNumber);
+            preparedStatement.setString(7, t.expiryDate);
+            preparedStatement.setString(8, t.pinCode + "");
+
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Could Not Add Ticket : " + e.getMessage());
+        }   
     }
 
 }
