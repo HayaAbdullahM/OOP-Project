@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
         add(framePanel);
 
         setResizable(false);
-        setSize(700, 500);
+        setSize(700, 540);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

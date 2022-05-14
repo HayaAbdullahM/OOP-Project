@@ -8,7 +8,7 @@ public class PaymentPanel extends JPanel {
     JTextField cardNumberTextField = new HintTextField("Card Number");
     JTextField cardHolderTextField = new HintTextField("Card Holder Name");
     JTextField cardMonthTextField = new HintTextField("Card Month");
-    JTextField cardDayTextField = new HintTextField("Card Day");
+    JTextField cardYearTextField = new HintTextField("Card Day");
     JTextField cardCVCTextField = new HintTextField("CVC");
 
     JButton payButton = new JButton();
@@ -27,7 +27,7 @@ public class PaymentPanel extends JPanel {
         cardNumberTextField.setBounds(172, 32, 356, 40);
         cardHolderTextField.setBounds(172, 82, 356, 40);
         cardMonthTextField.setBounds(172, 132, 100, 40);
-        cardDayTextField.setBounds(292, 132, 100, 40);
+        cardYearTextField.setBounds(292, 132, 100, 40);
         cardCVCTextField.setBounds(172, 182, 356, 40);
 
         payButton.setBounds(257, 232, 167, 50);
@@ -43,7 +43,7 @@ public class PaymentPanel extends JPanel {
         whitePanel.add(cardNumberTextField);
         whitePanel.add(cardHolderTextField);
         whitePanel.add(cardMonthTextField);
-        whitePanel.add(cardDayTextField);
+        whitePanel.add(cardYearTextField);
         whitePanel.add(cardCVCTextField);
         whitePanel.add(payButton);
 
@@ -71,13 +71,19 @@ public class PaymentPanel extends JPanel {
                             User.loggedInUser.username, 1, 0, Payment.totalPrice(),
                             cardHolderTextField.getText().trim(),
                             cardNumberTextField.getText().trim(),
-                            cardMonthTextField.getText().trim() + " " + cardDayTextField.getText().trim(),
+                            cardMonthTextField.getText().trim() + "/" + cardYearTextField.getText().trim(),
                             Integer.parseInt(cardCVCTextField.getText().trim()));
 
-                    Integer.parseInt(cardNumberTextField.getText().trim());
-                    Integer.parseInt(cardMonthTextField.getText().trim());
-                    Integer.parseInt(cardDayTextField.getText().trim());
-                    Integer.parseInt(cardCVCTextField.getText().trim());
+                    // Integer.parseInt(cardNumberTextField.getText().trim());
+                    // if (cardNumberTextField.getText().trim().length() < 16)
+                    // throw new Exception();
+                    // Integer.parseInt(cardMonthTextField.getText().trim());
+                    // if (!Handler.dateChecker("01/" + cardMonthTextField.getText().trim() + "/"
+                    // + cardYearTextField.getText().trim() + "24"))
+                    // throw new Exception();
+
+                    // Integer.parseInt(cardYearTextField.getText().trim());
+                    // Integer.parseInt(cardCVCTextField.getText().trim());
 
                     int answer = JOptionPane.showConfirmDialog(null, "Total Price : " + Payment.totalPrice() + "",
                             "Confirm Payment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);

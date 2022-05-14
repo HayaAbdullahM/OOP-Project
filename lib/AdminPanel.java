@@ -14,6 +14,7 @@ public class AdminPanel extends JPanel {
     JButton exportDataButton = new JButton("Export Movies");
     JButton exportTicketButton = new JButton("Export Ticket");
     JButton importDataButton = new JButton("Import Data");
+    JButton signOut = new JButton("Sign Out");
 
     AdminPanel() {
         setLayout(new BorderLayout());
@@ -32,24 +33,28 @@ public class AdminPanel extends JPanel {
         exportDataButton.setPreferredSize(new Dimension(120, 40));
         exportTicketButton.setPreferredSize(new Dimension(120, 40));
         importDataButton.setPreferredSize(new Dimension(120, 40));
+        signOut.setPreferredSize(new Dimension(120, 40));
 
         addMovieButton.setBackground(Color.WHITE);
         deleteMovieButton.setBackground(Color.WHITE);
         exportDataButton.setBackground(Color.WHITE);
         exportTicketButton.setBackground(Color.WHITE);
         importDataButton.setBackground(Color.WHITE);
+        signOut.setBackground(Color.WHITE);
 
         addMovieButton.setFocusable(false);
         deleteMovieButton.setFocusable(false);
         exportDataButton.setFocusable(false);
         exportTicketButton.setFocusable(false);
         importDataButton.setFocusable(false);
+        signOut.setFocusable(false);
 
         addMovieButton.addActionListener(new ButtonHandler());
         deleteMovieButton.addActionListener(new ButtonHandler());
         exportDataButton.addActionListener(new ButtonHandler());
         exportTicketButton.addActionListener(new ButtonHandler());
         importDataButton.addActionListener(new ButtonHandler());
+        signOut.addActionListener(new ButtonHandler());
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
@@ -59,12 +64,17 @@ public class AdminPanel extends JPanel {
         JPanel buttonPanelOne = new JPanel();
         JPanel buttonPanelTwo = new JPanel();
         JPanel buttonPanelThree = new JPanel();
+        JPanel buttonPanelFour = new JPanel();
 
         buttonPanelOne.setPreferredSize(new Dimension(100, 100));
         buttonPanelTwo.setPreferredSize(new Dimension(100, 100));
         buttonPanelThree.setPreferredSize(new Dimension(100, 100));
+        buttonPanelFour.setPreferredSize(new Dimension(100, 100));
 
         buttonPanelOne.add(addMovieButton);
+
+      
+
 
         buttonPanelThree.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
         buttonPanelTwo.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
@@ -76,12 +86,18 @@ public class AdminPanel extends JPanel {
         buttonPanelThree.add(exportTicketButton);
 
         buttonPanelOne.setBackground(Color.WHITE);
+        buttonPanelFour.setBackground(Color.WHITE);
         buttonPanelTwo.setBackground(Color.WHITE);
         buttonPanelThree.setBackground(Color.WHITE);
+
+
+        buttonPanelFour.add(signOut);
 
         buttonPanel.add(buttonPanelOne);
         buttonPanel.add(buttonPanelTwo);
         buttonPanel.add(buttonPanelThree);
+        buttonPanel.add(buttonPanelFour);
+
 
         whitePanel.add(mainLabel);
         whitePanel.add(buttonPanel);
@@ -166,6 +182,11 @@ public class AdminPanel extends JPanel {
                 Ticket.ticketsArr.clear();
 
             }
+
+            if(e.getSource() == signOut){
+                Main.cardLayout.show(MainFrame.framePanel, "mainPanel");
+            }
+
 
         }
 
