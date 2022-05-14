@@ -1,7 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
 public class LoginPanel extends JPanel {
 
@@ -14,7 +17,16 @@ public class LoginPanel extends JPanel {
     JButton loginButton = new JButton("Login");
     JButton returnButton = new JButton("return");
 
+    BufferedImage img;
+
     LoginPanel() {
+
+        // try {
+        // img = ImageIO.read(new
+        // URL("https://images.unsplash.com/photo-1649027421785-6827863f0891?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80"));
+        // } catch (Exception e) {
+
+        // }
 
         setLayout(new BorderLayout());
 
@@ -25,7 +37,9 @@ public class LoginPanel extends JPanel {
         blackLabel.setText("STAR CITY");
         blackLabel.setFont(new Font("Arial", Font.BOLD, 32));
         blackLabel.setForeground(Color.WHITE);
+
         blackLabel.setIcon(new ImageIcon("./resource/img/mainLogo.png"));
+        // blackLabel.setIcon(new ImageIcon(img));
         blackPanel.add(blackLabel);
 
         // ! White Panel
@@ -85,8 +99,8 @@ public class LoginPanel extends JPanel {
                 for (int i = 0; i < Admin.adminsArr.size(); i++) {
                     if (Admin.adminsArr.get(i).username.equals(textField.getText().trim())
                             && Admin.adminsArr.get(i).password.equals(passwordField.getText().trim())) {
-                        User.loggedInUser = new User(Customer.customersArr.get(i).username,
-                                Customer.customersArr.get(i).password);
+                        User.loggedInUser = new User(Admin.adminsArr.get(i).username,
+                                Admin.adminsArr.get(i).password);
                         Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
                         isFound = true;
                         break;

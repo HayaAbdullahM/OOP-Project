@@ -15,10 +15,11 @@ public class Movie {
     String showDate;
     String showTime;
     String type;
+    String imgLink;
 
     public Movie(String id, String title, String genre, String language, String duration, String ageRestriction,
             String IMDb,
-            String showDate, String showTime, String type) {
+            String showDate, String showTime, String type, String imgLink) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -29,6 +30,7 @@ public class Movie {
         this.showDate = showDate;
         this.showTime = showTime;
         this.type = type;
+        this.imgLink = imgLink;
     }
 
     public static String movieIdGenerator() {
@@ -43,10 +45,19 @@ public class Movie {
     }
 
     public static String[] getMoviesTitles() {
-        String[] titlesArr = new String[moviesArr.size()];
+
+        ArrayList<Movie> nowShowing = new ArrayList<Movie>();
 
         for (int i = 0; i < moviesArr.size(); i++) {
-            titlesArr[i] = moviesArr.get(i).title;
+            if (moviesArr.get(i).type.equals("Now-Showing")) {
+                nowShowing.add(moviesArr.get(i));
+            }
+        }
+
+        String[] titlesArr = new String[nowShowing.size()];
+
+        for (int i = 0; i < nowShowing.size(); i++) {
+            titlesArr[i] = nowShowing.get(i).title;
         }
 
         return titlesArr;

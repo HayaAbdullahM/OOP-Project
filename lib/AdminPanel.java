@@ -100,6 +100,10 @@ public class AdminPanel extends JPanel {
 
                 String movieId = Movie.getMovieId(movieName);
 
+                if(movieId.equals("-1")) {
+                    Handler.showError("No Movie With This Title");
+                }
+
                 for (int i = 0; i < Movie.moviesArr.size(); i++) {
                     if (Movie.moviesArr.get(i).id.equals(movieId)) {
                         Movie.moviesArr.remove(i);

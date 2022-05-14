@@ -21,8 +21,10 @@ public class AddMoviePanel extends JPanel {
 
     JButton addButton = new JButton("Add");
     JButton backButton = new JButton("Back");
+    JButton addImageURL = new JButton("Add Image");
 
     String type = "Now-Showing";
+    String ImageURL = "https://www.lyricsbogie.com/wp-content/uploads/2016/09/rami-dhoban-1953-200x275.jpg";
 
     AddMoviePanel() {
         setBackground(Color.white);
@@ -30,15 +32,18 @@ public class AddMoviePanel extends JPanel {
 
         backButton.setBounds(34, 21, 70, 31);
         backButton.setBackground(Color.white);
+        addImageURL.setBackground(Color.white);
 
         addButton.setBounds(592, 21, 70, 31);
         addButton.setBackground(Color.white);
 
         backButton.setFocusable(false);
         addButton.setFocusable(false);
+        addImageURL.setFocusable(false);
 
         backButton.addActionListener(new ButtonHandler());
         addButton.addActionListener(new ButtonHandler());
+        addImageURL.addActionListener(new ButtonHandler());
 
         JLabel titleLabel = new JLabel("Movie Title : ");
         titleLabel.setBounds(60, 69, 81, 31);
@@ -74,6 +79,7 @@ public class AddMoviePanel extends JPanel {
         IMDbTextField.setBounds(225, 304, 356, 40);
         showTimeOneTextField.setBounds(225, 352, 159, 40);
         showTimeTwoTextField.setBounds(387, 352, 159, 40);
+        addImageURL.setBounds(572, 352, 100, 40);
 
         radioButton.add(nowShowing);
 
@@ -89,7 +95,6 @@ public class AddMoviePanel extends JPanel {
         add(ageRestrictionLabel);
         add(IMDbLabel);
         add(showTimeLabel);
-
         add(movieTitle);
         add(genreTextField);
         add(languageTextField);
@@ -109,7 +114,7 @@ public class AddMoviePanel extends JPanel {
 
         add(nowShowingLabel);
         add(upComingLabel);
-
+        add(addImageURL);
         add(nowShowing);
         add(upComing);
 
@@ -130,6 +135,18 @@ public class AddMoviePanel extends JPanel {
 
             }
 
+            if (addImageURL == e.getSource()) {
+                ImageURL = JOptionPane.showInputDialog(null, "Add Poster", "Insert Image URL",
+                        JOptionPane.OK_CANCEL_OPTION);
+                if (!Handler.isImage(ImageURL)) {
+                    JOptionPane.showMessageDialog(null, "Image URL Was Wrong \nPlease Try Again", "Error Occurred",
+                            JOptionPane.ERROR_MESSAGE);
+                    ImageURL = "https://www.lyricsbogie.com/wp-content/uploads/2016/09/rami-dhoban-1953-200x275.jpg";
+                }
+
+                System.out.println(ImageURL);
+            }
+
             if (e.getSource() == backButton) {
                 Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
             }
@@ -148,7 +165,7 @@ public class AddMoviePanel extends JPanel {
                 String showTime = showTimeOneTextField.getText().trim();
 
                 Movie movie = new Movie(
-                        id, title, genre, language, duration, ageRestriction, IMDb, showDate, showTime, type);
+                        id, title, genre, language, duration, ageRestriction, IMDb, showDate, showTime, type, ImageURL);
 
                 Movie.moviesArr.add(movie);
 

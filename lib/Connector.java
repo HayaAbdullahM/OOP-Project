@@ -45,8 +45,22 @@ public class Connector {
     public void addMovie(Movie movie) {
         PreparedStatement createStatement;
         try {
-            createStatement = connection.prepareStatement(
-                    "INSERT INTO `Movies` (`id`, `title`, `genre`,  `language` ,`duration`, `ageRestriction`, `IMDb`, `showDate`, `showTime`, `type`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
+
+            if (movie.type.equals("Now-Showing")) {
+                createStatement = connection.prepareStatement(
+                        "INSERT INTO `nowShowing` (`id`, `title`, `genre`,  `language` ,`duration`, `ageRestriction`, `IMDb`, `showDate`, `showTime`, `imageLink`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
+
+            } else {
+                createStatement = connection.prepareStatement(
+                        "INSERT INTO `upComing` (`id`, `title`, `genre`,  `language` ,`duration`, `ageRestriction`, `IMDb`, `showDate`, `showTime`, `imgLink`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ");
+
+            }
+
+
+        if(movie.imgLink.equals("")){
+            System.out.println("No Image");
+        }    
+
             createStatement.setString(1, movie.id);
             createStatement.setString(2, movie.title);
             createStatement.setString(3, movie.genre);
@@ -56,7 +70,7 @@ public class Connector {
             createStatement.setString(7, movie.IMDb);
             createStatement.setString(8, movie.showDate);
             createStatement.setString(9, movie.showTime);
-            createStatement.setString(10, movie.type);
+            createStatement.setString(10, movie.imgLink);
 
             createStatement.executeUpdate();
 
@@ -102,7 +116,7 @@ public class Connector {
     public void setMovies() {
 
         try {
-            ResultSet rs = statement.executeQuery("SELECT * FROM `Movies` WHERE 1");
+            ResultSet rs = statement.executeQuery("SELECT * FROM `nowShowing`");
 
             while (rs.next()) {
                 String id = rs.getString("id");
@@ -114,15 +128,34 @@ public class Connector {
                 String IMDb = rs.getString("IMDb");
                 String showDate = rs.getString("showDate");
                 String showTime = rs.getString("showTime");
-                String type = rs.getString("type");
+                String imgLink = rs.getString("imageLink");
 
                 Movie.moviesArr.add(new Movie(id, title, genre, language, duration, ageRestriction, IMDb, showDate,
-                        showTime, type));
+                        showTime, "Now-Showing", imgLink));
+
+            }
+
+            rs = statement.executeQuery("SELECT * FROM `upComing`");
+
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String title = rs.getString("title");
+                String genre = rs.getString("genre");
+                String language = rs.getString("language");
+                String duration = rs.getInt("duration") + "";
+                String ageRestriction = rs.getString("ageRestriction");
+                String IMDb = rs.getString("IMDb");
+                String showDate = rs.getString("showDate");
+                String showTime = rs.getString("showTime");
+                String imgLink = rs.getString("imgLink");
+
+                Movie.moviesArr.add(new Movie(id, title, genre, language, duration, ageRestriction, IMDb, showDate,
+                        showTime, "Up-Coming", imgLink));
 
             }
 
         } catch (Exception e) {
-            System.out.println("Could Not Set Movies");
+            System.out.println("Could Not Set Movies : " + e.getMessage());
         }
 
     }

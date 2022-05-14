@@ -97,7 +97,6 @@ public class SignUpPanel extends JPanel {
 
     private class ButtonHandler implements ActionListener {
 
-        
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == signUpButton) {
@@ -108,10 +107,24 @@ public class SignUpPanel extends JPanel {
                 String age = ageTextField.getText().trim();
 
                 if ((!username.isEmpty()) && (!password.isEmpty()) & (!email.isEmpty()) && !(password.isEmpty())) {
-                    System.out.println("Created");
-                    Main.database.addCostumer(username, password, email, age);
 
-                    Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                    if (Handler.isEmail(email)) {
+
+                        try {
+                            Integer.parseInt(age);
+
+                            Main.database.addCostumer(username, password, email, age);
+
+                            Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+
+                        } catch (Exception ex) {
+                            Handler.showError("Please Enter A Valid Age");
+                        }
+
+                    } else {
+                        Handler.showError("Please Enter A Valid Email");
+                    }
+
                 }
 
             }
