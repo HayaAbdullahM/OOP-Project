@@ -14,6 +14,13 @@ public class FilesManager {
         return chooser.getSelectedFile().toPath();
     }
 
+    public static Path getDownloadPath(String x) {
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.showOpenDialog(null);
+        return chooser.getSelectedFile().toPath();
+    }
+
     public static void downloadCSVTickets() {
         openFile();
         addTicketsRecords();
@@ -26,7 +33,8 @@ public class FilesManager {
                 "");
         for (int i = 0; i < Ticket.ticketsArr.size(); i++) {
             Ticket t = Ticket.ticketsArr.get(i);
-            output.format("%s , %s , %s , %s , %s , %s , %s , %s \n", t.username , t.adults , t.kids , t.totalPrice , t.cardHolder , t.cardNumber , t.expiryDate , t.pinCode);
+            output.format("%s , %s , %s , %s , %s , %s , %s , %s \n", t.username, t.adults, t.kids, t.totalPrice,
+                    t.cardHolder, t.cardNumber, t.expiryDate, t.pinCode);
         }
 
     }
@@ -54,6 +62,25 @@ public class FilesManager {
             Movie m = Movie.moviesArr.get(i);
             output.format("%s , %s , %s , %s , %s , %s , %s , %s , %s , %s \n", m.id, m.title, m.genre, m.language,
                     m.duration, m.ageRestriction, m.IMDb, m.showDate, m.showTime, m.type);
+        }
+
+    }
+
+    public static void importMovie() {
+        try {
+            Path folderPath = getDownloadPath("");
+            Scanner scanner = new Scanner(folderPath);
+            scanner.nextLine();
+            while (scanner.hasNextLine()) {
+                String[] line = scanner.nextLine().trim().split(",");
+                Movie m = new Movie(line[0], line[1], line[2], line[3], line[4], line[5], line[6], line[7], line[8],
+                        line[9], line[10]);
+                Main.database.addMovie(m);
+                Movie.moviesArr.add(m);
+            }
+            scanner.close();
+        } catch (Exception e) {
+
         }
 
     }

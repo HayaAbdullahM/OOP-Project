@@ -30,4 +30,47 @@ public class Handler {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    public static boolean dateChecker(String input) {
+
+        if (input.equalsIgnoreCase("SOON")) {
+            return true;
+        }
+
+        if (input.length() == 10) {
+            if (isNumber(input.charAt(0) + "") && isNumber(input.charAt(1) + "") && input.charAt(2) == '/'
+                    && isNumber(input.charAt(3) + "") && isNumber(input.charAt(4) + "") && input.charAt(5) == '/'
+                    && isNumber(input.charAt(6) + "") && isNumber(input.charAt(7) + "")
+                    && isNumber(input.charAt(8) + "") && isNumber(input.charAt(9) + "")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean timeChecker(String input) {
+
+        if (input.equalsIgnoreCase("SOON")) {
+            return true;
+        }
+
+        if (input.length() == 5) {
+            if (isNumber(input.charAt(0) + "") && isNumber(input.charAt(1) + "") && input.charAt(2) == ':'
+                    && isNumber(input.charAt(3) + "") && isNumber(input.charAt(4) + "")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isNumber(String numbers) {
+        try {
+            Integer.parseInt(numbers);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

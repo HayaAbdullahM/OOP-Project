@@ -13,6 +13,7 @@ public class AdminPanel extends JPanel {
     JButton deleteMovieButton = new JButton("Delete Movie");
     JButton exportDataButton = new JButton("Export Movies");
     JButton exportTicketButton = new JButton("Export Ticket");
+    JButton importDataButton = new JButton("Import Data");
 
     AdminPanel() {
         setLayout(new BorderLayout());
@@ -30,21 +31,25 @@ public class AdminPanel extends JPanel {
         deleteMovieButton.setPreferredSize(new Dimension(120, 40));
         exportDataButton.setPreferredSize(new Dimension(120, 40));
         exportTicketButton.setPreferredSize(new Dimension(120, 40));
+        importDataButton.setPreferredSize(new Dimension(120, 40));
 
         addMovieButton.setBackground(Color.WHITE);
         deleteMovieButton.setBackground(Color.WHITE);
         exportDataButton.setBackground(Color.WHITE);
         exportTicketButton.setBackground(Color.WHITE);
+        importDataButton.setBackground(Color.WHITE);
 
         addMovieButton.setFocusable(false);
         deleteMovieButton.setFocusable(false);
         exportDataButton.setFocusable(false);
         exportTicketButton.setFocusable(false);
+        importDataButton.setFocusable(false);
 
         addMovieButton.addActionListener(new ButtonHandler());
         deleteMovieButton.addActionListener(new ButtonHandler());
         exportDataButton.addActionListener(new ButtonHandler());
         exportTicketButton.addActionListener(new ButtonHandler());
+        importDataButton.addActionListener(new ButtonHandler());
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.WHITE);
@@ -60,9 +65,12 @@ public class AdminPanel extends JPanel {
         buttonPanelThree.setPreferredSize(new Dimension(100, 100));
 
         buttonPanelOne.add(addMovieButton);
-        buttonPanelTwo.add(deleteMovieButton);
 
         buttonPanelThree.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+        buttonPanelTwo.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
+
+        buttonPanelTwo.add(deleteMovieButton);
+        buttonPanelTwo.add(importDataButton);
 
         buttonPanelThree.add(exportDataButton);
         buttonPanelThree.add(exportTicketButton);
@@ -129,6 +137,11 @@ public class AdminPanel extends JPanel {
                     ;
                 }
             }
+
+            if(importDataButton == e.getSource()){
+                FilesManager.importMovie();
+            }
+
 
             if (e.getSource() == exportDataButton) {
                 FilesManager.downloadCSVMovies();

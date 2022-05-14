@@ -6,6 +6,8 @@ import java.awt.event.*;
 
 public class AddMoviePanel extends JPanel {
 
+    String selectedAge = "3";
+
     JTextField movieTitle = new JTextField();
     JTextField genreTextField = new JTextField();
     JTextField languageTextField = new JTextField();
@@ -15,16 +17,16 @@ public class AddMoviePanel extends JPanel {
     JTextField showTimeOneTextField = new JTextField();
     JTextField showTimeTwoTextField = new JTextField();
 
-    String[] genere = {
+    String[] genres = {
             "Action", "Comedy", "Drama", "Family", "Horor"
     };
 
-    String[] language = {
+    String[] languages = {
             "English", "Arabic", "Indian"
     };
 
-    JComboBox genreComboBox = new JComboBox(genere);
-    JComboBox languageComboBox = new JComboBox(language);
+    JComboBox genreComboBox = new JComboBox(genres);
+    JComboBox languageComboBox = new JComboBox(languages);
 
     JRadioButton nowShowing = new JRadioButton("NOW-SHOWING", true);
     JRadioButton upComing = new JRadioButton("UP-COMING", false);
@@ -158,6 +160,12 @@ public class AddMoviePanel extends JPanel {
 
         upComing.addActionListener(new ButtonHandler());
 
+        ageThree.addActionListener(new ButtonHandler());
+        ageSeven.addActionListener(new ButtonHandler());
+        ageTwelve.addActionListener(new ButtonHandler());
+        ageSixteen.addActionListener(new ButtonHandler());
+        ageEighteen.addActionListener(new ButtonHandler());
+
         add(nowShowingLabel);
         add(upComingLabel);
         add(addImageURL);
@@ -173,6 +181,18 @@ public class AddMoviePanel extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource() == ageThree) {
+                selectedAge = "3";
+            } else if (e.getSource() == ageSeven) {
+                selectedAge = "7";
+            } else if (e.getSource() == ageTwelve) {
+                selectedAge = "12";
+            } else if (e.getSource() == ageSixteen) {
+                selectedAge = "16";
+            } else if (e.getSource() == ageEighteen) {
+                selectedAge = "18";
+            }
 
             if (e.getSource() == nowShowing) {
                 type = "Now-Showing";
@@ -198,37 +218,58 @@ public class AddMoviePanel extends JPanel {
             }
             if (e.getSource() == addButton) {
 
-                String id = Movie.movieIdGenerator();
-                String title = movieTitle.getText().trim();
-                String genre = genreTextField.getText().trim();
-                String language = languageTextField.getText().trim();
+                try {
+                    String id = Movie.movieIdGenerator();
+                    String title = movieTitle.getText().trim();
 
-                String duration = durationTextField.getText().trim();
+                    String duration = durationTextField.getText().trim();
+                    Integer.parseInt(duration);
 
-                String ageRestriction = ageResTextField.getText().trim();
-                String IMDb = IMDbTextField.getText().trim();
-                String showDate = showTimeTwoTextField.getText().trim();
-                String showTime = showTimeOneTextField.getText().trim();
+                    String IMDb = IMDbTextField.getText().trim();
+                    String showDate = showTimeTwoTextField.getText().trim();
+                    String showTime = showTimeOneTextField.getText().trim();
 
-                Movie movie = new Movie(
-                        id, title, genre, language, duration, ageRestriction, IMDb, showDate, showTime, type, ImageURL);
+                    System.out.println(selectedAge);
 
-                Movie.moviesArr.add(movie);
+                    if (!title.equals("") && !duration.equals("") && !showTime.equals("") && !showDate.equals("")) {
+                        Movie movie = new Movie(
+                                id, title, genres[genreComboBox.getSelectedIndex()],
+                                languages[languageComboBox.getSelectedIndex()], duration, selectedAge, IMDb, showDate,
+                                showTime,
+                                type, ImageURL);
 
-                Main.database.addMovie(movie);
-                Main.database.createTicketTable(id);
+                        Double.parseDouble(IMDb);
+                        if (!Handler.dateChecker(showDate))
+                            throw new Exception();
+                        if (!Handler.timeChecker(showTime))
+                            throw new Exception();
 
-                Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
+                        System.out.println(languages[languageComboBox.getSelectedIndex()]);
+                        System.out.println(genres[genreComboBox.getSelectedIndex()]);
 
-                showTimeTwoTextField.setText("");
-                showTimeOneTextField.setText("");
-                IMDbTextField.setText("");
-                ageResTextField.setText("");
-                durationTextField.setText("");
-                durationTextField.setText("");
-                languageTextField.setText("");
-                genreTextField.setText("");
-                movieTitle.setText("");
+                        Movie.moviesArr.add(movie);
+
+                        Main.database.addMovie(movie);
+                        Main.database.createTicketTable(id);
+
+                        Main.cardLayout.show(MainFrame.framePanel, "adminPanel");
+
+                        showTimeTwoTextField.setText("");
+                        showTimeOneTextField.setText("");
+                        IMDbTextField.setText("");
+                        ageResTextField.setText("");
+                        durationTextField.setText("");
+                        durationTextField.setText("");
+                        languageTextField.setText("");
+                        genreTextField.setText("");
+                        movieTitle.setText("");
+                    } else {
+                        Handler.showError("One Of The Inputs It Wrong\nPlease try Again");
+                    }
+
+                } catch (Exception ex) {
+                    Handler.showError("One Of The Inputs Is Wrong\nPlease Try Again");
+                }
 
             }
         }
