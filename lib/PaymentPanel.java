@@ -75,15 +75,15 @@ public class PaymentPanel extends JPanel {
                             Integer.parseInt(cardCVCTextField.getText().trim()));
 
                     // Integer.parseInt(cardNumberTextField.getText().trim());
-                    // if (cardNumberTextField.getText().trim().length() < 16)
+                     //if (cardNumberTextField.getText().trim().length() < 16)
                     // throw new Exception();
-                    // Integer.parseInt(cardMonthTextField.getText().trim());
-                    // if (!Handler.dateChecker("01/" + cardMonthTextField.getText().trim() + "/"
-                    // + cardYearTextField.getText().trim() + "24"))
+                     //Integer.parseInt(cardMonthTextField.getText().trim());
+                    //if (!Handler.dateChecker("01/" + cardMonthTextField.getText().trim() + "/"
+                     //+ cardYearTextField.getText().trim() + "24"))
                     // throw new Exception();
 
-                    // Integer.parseInt(cardYearTextField.getText().trim());
-                    // Integer.parseInt(cardCVCTextField.getText().trim());
+                    //Integer.parseInt(cardYearTextField.getText().trim());
+                    //Integer.parseInt(cardCVCTextField.getText().trim());
 
                     int answer = JOptionPane.showConfirmDialog(null, "Total Price : " + Payment.totalPrice() + "",
                             "Confirm Payment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
