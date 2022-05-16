@@ -57,6 +57,11 @@ public class AddMoviePanel extends JPanel {
         ageRestrictionRadioButton.add(ageSixteen);
         ageRestrictionRadioButton.add(ageEighteen);
 
+
+        languageComboBox.setBackground(Color.white);
+        genreComboBox.setBackground(Color.white);
+
+
         Panel agePanel = new Panel();
         agePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 10));
         agePanel.add(ageThree);
