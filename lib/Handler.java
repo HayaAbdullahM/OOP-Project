@@ -64,13 +64,29 @@ public class Handler {
         return false;
     }
 
-    public static boolean isNumber(String numbers) {
+    public static boolean isNumber(String number) {
         try {
-            Integer.parseInt(numbers);
+            Integer.parseInt(number);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
+
+
+    public static boolean isNumbers (String numbers) {
+        boolean number = true ; 
+        
+        for(int i = 0 ; i < numbers.length() ; i++) {
+            char n = numbers.charAt(i);
+            if(!(n >= '0' && n <= '9')){
+                number = false ; 
+            }
+        }
+
+        return number ; 
+
+    }
+
 
 }

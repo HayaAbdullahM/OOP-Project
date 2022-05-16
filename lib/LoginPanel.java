@@ -119,6 +119,11 @@ public class LoginPanel extends JPanel {
                     }
                 }
 
+                if (isFound) {
+                    textField.setText("");
+                    passwordField.setText("");
+                }
+
                 if (!isFound) {
 
                     JOptionPane.showMessageDialog(null, "Incorrect Username Or Password\nPlease Try Again",

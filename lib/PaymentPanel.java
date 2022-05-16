@@ -8,7 +8,7 @@ public class PaymentPanel extends JPanel {
     JTextField cardNumberTextField = new HintTextField("Card Number");
     JTextField cardHolderTextField = new HintTextField("Card Holder Name");
     JTextField cardMonthTextField = new HintTextField("Card Month");
-    JTextField cardYearTextField = new HintTextField("Card Day");
+    JTextField cardYearTextField = new HintTextField("Card Year");
     JTextField cardCVCTextField = new HintTextField("CVC");
 
     JButton payButton = new JButton();
@@ -67,36 +67,37 @@ public class PaymentPanel extends JPanel {
 
                 try {
 
-                    Ticket t = new Ticket(
-                            User.loggedInUser.username, 1, 0, Payment.totalPrice(),
-                            cardHolderTextField.getText().trim(),
-                            cardNumberTextField.getText().trim(),
-                            cardMonthTextField.getText().trim() + "/" + cardYearTextField.getText().trim(),
-                            Integer.parseInt(cardCVCTextField.getText().trim()));
+                    String cardHolder = cardHolderTextField.getText().trim();
+                    String cardNumber = cardNumberTextField.getText().trim();
+                    String cardMonth = cardMonthTextField.getText().trim();
+                    String cardYear = cardYearTextField.getText().trim();
+                    String cardCVC = cardCVCTextField.getText().trim();
 
-                    // Integer.parseInt(cardNumberTextField.getText().trim());
-                     //if (cardNumberTextField.getText().trim().length() < 16)
-                    // throw new Exception();
-                     //Integer.parseInt(cardMonthTextField.getText().trim());
-                    //if (!Handler.dateChecker("01/" + cardMonthTextField.getText().trim() + "/"
-                     //+ cardYearTextField.getText().trim() + "24"))
-                    // throw new Exception();
+                    if (cardNumber.length() == 16 && cardMonth.length() == 2 && cardYear.length() == 4
+                            && cardCVC.length() == 3
+                            && Handler.isNumbers(cardNumber + cardMonth + cardYear + cardCVC)) {
+                        Ticket t = new Ticket(
+                                User.loggedInUser.username, 1, 0, Payment.totalPrice(),
+                                cardHolderTextField.getText().trim(),
+                                cardNumberTextField.getText().trim(),
+                                cardMonthTextField.getText().trim() + "/" + cardYearTextField.getText().trim(),
+                                Integer.parseInt(cardCVCTextField.getText().trim()));
 
-                    //Integer.parseInt(cardYearTextField.getText().trim());
-                    //Integer.parseInt(cardCVCTextField.getText().trim());
+                        int answer = JOptionPane.showConfirmDialog(null, "Total Price : " + Payment.totalPrice() + "",
+                                "Confirm Payment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
-                    int answer = JOptionPane.showConfirmDialog(null, "Total Price : " + Payment.totalPrice() + "",
-                            "Confirm Payment", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                        if (answer == 0) {
+                            JOptionPane.showMessageDialog(null, "Print Your Ticket", "Payed Successfully",
+                                    JOptionPane.YES_NO_CANCEL_OPTION);
 
-                    if (answer == 0) {
-                        JOptionPane.showMessageDialog(null, "Print Your Ticket", "Payed Successfully",
-                                JOptionPane.YES_NO_CANCEL_OPTION);
+                            Main.database.addTicket(Movie.selectedMovie, t);
 
-                        Main.database.addTicket(Movie.selectedMovie, t);
-
-                        Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                            Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                        } else {
+                            Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                        }
                     } else {
-                        Main.cardLayout.show(MainFrame.framePanel, "customerPanel");
+                        System.out.println("Wrong");
                     }
 
                 } catch (Exception ex) {
